@@ -1,5 +1,5 @@
 ---
-title: "data_wrangling_ii"
+title: "Reading data from the web"
 author: "Rae Spriggs"
 date: "2022-10-13"
 output: github_document
@@ -105,4 +105,40 @@ reviews =
 )
 ```
  
+## APIs 
+
+NYC OpenData water consumption data 
+```{r}
+water_df = 
+  GET("https://data.cityofnewyork.us/resource/ia2d-e54m.csv") %>% 
+  content("parsed")
+
+```
+
+ BRFSS data (WILDFIRE AND MENTAL HEALTH DATA - DISSERTATION RESEARCH)
  
+```{r}
+brfss_smart2010 = 
+  GET("https://chronicdata.cdc.gov/resource/acme-vg9e.csv",
+      query = list("$limit" = 5000)) %>% 
+  content("parsed")
+```
+
+Pokemon data 
+
+```{r}
+poke = 
+  GET("http://pokeapi.co/api/v2/pokemon/1") %>%
+  content()
+
+names(poke)
+
+poke$name
+
+poke$abilities
+
+poke[["stats"]]
+
+```
+
+
